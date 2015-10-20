@@ -17,5 +17,4 @@
 /tmp
 
 # Secrets
-/config/secrets.yml
 /config/initializers/omniauth.rb
