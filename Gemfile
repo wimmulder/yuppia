@@ -44,6 +44,7 @@ group :development do
   gem 'spring'
   gem 'omniauth-facebook'
   gem 'dotenv-rails'
+  gem 'bootstrap-sass'
 end
 
 group :production do
