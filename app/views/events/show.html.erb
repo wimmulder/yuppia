@@ -1,23 +1,23 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Event:</strong>
+  <strong>Titel:</strong>
   <%= @event.event_id %>
 </p>
 
 <p>
-  <strong>Description:</strong>
+  <strong>Omschrijving:</strong>
   <%= @event.description %>
 </p>
 
 <p>
-  <strong>Date:</strong>
+  <strong>Datum:</strong>
   <%= @event.date %>
 </p>
 
 <p>
-  <strong>Generated:</strong>
-  <%= @event.generated %>
+  <strong>Aangemaakt op:</strong>
+  <%= @event.created_at %>
 </p>
 
 <%= link_to 'Edit', edit_event_path(@event) %> |
