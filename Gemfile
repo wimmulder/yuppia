@@ -44,7 +44,7 @@ group :development do
   gem 'spring'
   gem 'omniauth-facebook'
   gem 'bootstrap-sass'
-  gem 'geokit-rails'
+  gem 'geocoder'
 end
 
 group :production do

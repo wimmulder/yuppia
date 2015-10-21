@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151020112844) do
+ActiveRecord::Schema.define(version: 20151021185623) do
 
   create_table "events", force: :cascade do |t|
     t.string   "event_id"
@@ -19,6 +19,8 @@ ActiveRecord::Schema.define(version: 20151020112844) do
     t.datetime "date"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.float    "latitude"
+    t.float    "longitude"
   end
 
   add_index "events", ["event_id"], name: "index_events_on_event_id"
