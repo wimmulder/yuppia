@@ -1,5 +1,10 @@
 <p id="notice"><%= notice %></p>
 
+<h1>Kaartje</h2>
+<%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@event.latitude}%2C#{@event.longitude}" %>
+
+
+<h2>Evenementdetails</h2>
 <p>
   <strong>Titel:</strong>
   <%= @event.event_id %>
@@ -30,8 +35,9 @@
   <%= @event.longitude %>
 </p>
 
+  <h2>Afstand naar Times Square</h2>
+  <%= @event.distance_to("Times Square, New York") %>
 
-<%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@event.latitude}%2C#{@event.longitude}" %>
 
 <br><br>
 <%= link_to 'Edit', edit_event_path(@event) %> |
