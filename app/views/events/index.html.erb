@@ -1,3 +1,6 @@
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+
+
 <p id="notice"><%= notice %></p>
 
 <% if current_user %>
@@ -10,6 +13,8 @@
 <% end %>
 
 <h2>Evenementen</h2>
+
+<%= link_to 'Nieuw evenement aanmaken', new_event_path, :class => "btn btn-primary" %>
 
 <table>
   <thead>
@@ -25,11 +30,10 @@
   <tbody>
     <% @events.each do |event| %>
       <tr>
-        <td><%= event.event_id %></td>
+        <td><%= link_to event.event_id, event %></td>
         <td><%= event.description %></td>
         <td><%= event.date %></td>
         <td><%= event.created_at %></td>
-        <td><%= link_to 'Details', event %></td>
         <td><%= link_to 'Bewerken', edit_event_path(event) %></td>
         <td><%= link_to 'Verwijderen', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
@@ -40,13 +44,39 @@
 <br />
 
 
+<div id="map" style="width: 600px; height: 500px;"></div>
+
+
+<script type="text/javascript">
+  // Create the map
+  var map = new google.maps.Map(document.getElementById("map"), {
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  });
+
+  // Initialize the bounds container
+  var bounds = new google.maps.LatLngBounds();
+
+  <% @events.each do |event| %>
+    // Create the LatLng
+    var latLng = new google.maps.LatLng(<%= event.latitude %>, <%= event.longitude %>);
+
+    // Create the marker
+    var marker = new google.maps.Marker({
+        position: latLng,
+        map: map,
+        title: '<%= escape_javascript(event.event_id) %>'
+    });
 
 
 
+    google.maps.event.addListener(marker, 'click', function() {
+      document.location = '<%= event_path(event) %>';
+    });
 
+    // Extend the bounds
+    bounds.extend(latLng);
+  <% end %>
 
-<%= link_to 'Nieuw evenement aanmaken', new_event_path, :class => "btn btn-primary" %>
-<br><br>
-<% @events.each do |event| %>
-  <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{event.latitude}%2C#{event.longitude}" %>
-<% end %>
+  // Fit to bounds
+  map.fitBounds(bounds);
+</script>
