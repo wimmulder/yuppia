@@ -16,11 +16,14 @@
 
 <%= link_to 'Nieuw evenement aanmaken', new_event_path, :class => "btn btn-primary" %>
 
+<br /><br />
+
 <table>
   <thead>
     <tr>
       <th>Titel</th>
       <th>Omschrijving</th>
+      <th>Adres</th>
       <th>Datum</th>
       <th>Aangemaakt op</th>
       <th colspan="3"></th>
@@ -32,6 +35,7 @@
       <tr>
         <td><%= link_to event.event_id, event %></td>
         <td><%= event.description %></td>
+        <td><%= event.address %></td>
         <td><%= event.date %></td>
         <td><%= event.created_at %></td>
         <td><%= link_to 'Bewerken', edit_event_path(event) %></td>
