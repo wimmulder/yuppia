@@ -1,6 +1,15 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Evenementen</h1>
+<% if current_user %>
+  <h1>Welcome!</h1>
+  Signed in as <strong><%= current_user.name %></strong>!
+  <%= link_to "Sign out", signout_path %>
+<% else %>
+  <h1>Sign in</h1>
+  <%= link_to "Sign in with Facebook", signin_path %>
+<% end %>
+
+<h2>Evenementen</h2>
 
 <table>
   <thead>

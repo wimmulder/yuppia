@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
 
   resources :events
-  get 'home/index'
+  get 'events/index'
 
-  root :to => 'home#index'
+  root :to => 'events#index'
 
   get '/auth/:provider/callback' => 'sessions#create'
 
