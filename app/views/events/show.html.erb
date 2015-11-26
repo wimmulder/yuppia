@@ -1,9 +1,39 @@
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+
 <p id="notice"><%= notice %></p>
 
 <h1>Kaartje</h2>
 
 
-<%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@event.latitude}%2C#{@event.longitude}" %>
+    <div id="map" style="width: 600px; height: 500px;"></div>
+
+  <script>
+  // Create the map
+  var map = new google.maps.Map(document.getElementById("map"), {
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  });
+
+  // Initialize the bounds container
+  var bounds = new google.maps.LatLngBounds();
+
+    // Create the LatLng
+    var latLng = new google.maps.LatLng(<%= @event.latitude %>, <%= @event.longitude %>);
+
+    // Create the marker
+    var marker = new google.maps.Marker({
+        position: latLng,
+        map: map,
+    });
+
+    // Extend the bounds
+    bounds.extend(latLng);
+
+  // Fit to bounds
+  map.fitBounds(bounds);
+  </script>
+
+
+
 
 
 <h2>Evenementdetails</h2>
