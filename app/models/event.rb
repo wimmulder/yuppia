@@ -1,4 +1,4 @@
 class Event < ActiveRecord::Base
-  geocoded_by :description
+  geocoded_by :address
   after_validation :geocode
 end
