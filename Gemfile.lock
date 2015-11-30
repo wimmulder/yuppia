@@ -42,9 +42,8 @@ GEM
       json
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    bootstrap-sass (3.3.5.1)
-      autoprefixer-rails (>= 5.0.0.1)
-      sass (>= 3.3.0)
+    bootstrap-sass (3.0.2.1)
+      sass (~> 3.2)
     builder (3.2.2)
     byebug (6.0.2)
     coffee-rails (4.1.0)
@@ -175,7 +174,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bootstrap-sass
+  autoprefixer-rails
+  bootstrap-sass (= 3.0.2.1)
   byebug
   coffee-rails (~> 4.1.0)
   geocoder
@@ -188,6 +188,7 @@ DEPENDENCIES
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   spring
+  sprockets
   sqlite3
   turbolinks
   tzinfo-data
