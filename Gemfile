@@ -43,11 +43,11 @@ group :development do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-  gem 'omniauth-facebook'
   gem 'geocoder'
   gem 'tzinfo-data'
   gem 'autoprefixer-rails'
   gem 'sprockets'
+  gem 'devise'
 end
 
 group :production do

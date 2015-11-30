@@ -1,7 +1,15 @@
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 
 
-<p id="notice"><%= notice %></p>
+
+<% if user_signed_in? %>
+      <%= link_to "Log out", destroy_user_session_path, method: :delete %>
+     <% else %>
+       <p>
+         <%= link_to "Log in", new_user_session_path, class: "btn btn-default btn-lg" %>
+         <%= link_to "Sign up", new_user_registration_path, class: "btn btn-primary btn-lg" %>
+       </p>
+  <% end %>
 
 <h2>Evenementen</h2>
 
