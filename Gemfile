@@ -45,10 +45,9 @@ group :development do
   gem 'omniauth-facebook'
   gem 'bootstrap-sass'
   gem 'geocoder'
+  gem 'tzinfo-data'
 end
 
 group :production do
   gem 'pg'
 end
-
-gem 'tzinfo-data'
