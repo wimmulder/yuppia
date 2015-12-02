@@ -15,7 +15,9 @@
 
 <h2>Evenementen</h2>
 
-<%= link_to 'Nieuw evenement aanmaken', new_event_path, :class => "btn btn-primary" %>
+<% if user_signed_in? %>
+  <%= link_to 'Nieuw evenement aanmaken', new_event_path, :class => "btn btn-primary" %>
+<% end %>
 
 <br /><br />
 
@@ -27,7 +29,8 @@
       <th>Adres</th>
       <th>Datum</th>
       <th>Aangemaakt op</th>
-      <th colspan="3"></th>
+      <th>Gebruiker</th>
+      <th colspan="2"></th>
     </tr>
   </thead>
 
@@ -39,8 +42,13 @@
         <td><%= event.address %></td>
         <td><%= event.date %></td>
         <td><%= event.created_at %></td>
-        <td><%= link_to 'Bewerken', edit_event_path(event) %></td>
-        <td><%= link_to 'Verwijderen', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= event.user.name %></td>
+        <td>
+        <% if event.user == current_user %>
+          <%= link_to 'Bewerken', edit_event_path(event) %>
+          <%= link_to 'Verwijderen', event, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>

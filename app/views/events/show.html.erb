@@ -77,5 +77,7 @@
 
 
 <br><br>
-<%= link_to 'Edit', edit_event_path(@event) %> |
-<%= link_to 'Back', events_path %>
+<% if @event.user == current_user %>
+  <%= link_to 'Bewerken', edit_event_path(@event) %>
+<% end %>
+<%= link_to 'Terug naar overzicht', events_path %>
