@@ -4,6 +4,20 @@ class EventsController < ApplicationController
   before_action :correct_user, only: [:edit, :update, :destroy]
 
 
+  def like
+    @event = Event.find(params[:id])
+
+
+    if current_user.flagged?(@event, :like)
+      current_user.unflag(@event, :like)
+      msg = "You now don't like this article anymore"
+
+    else
+      current_user.flag(@event, :like)
+      msg = "You now like this article"
+    end
+    redirect_to events_path, :notice => msg
+  end
 
 
 

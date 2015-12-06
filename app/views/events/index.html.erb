@@ -30,6 +30,7 @@
       <th>Datum</th>
       <th>Aangemaakt op</th>
       <th>Gebruiker</th>
+      <th>Aantal deelnemers</th>
       <th colspan="2"></th>
     </tr>
   </thead>
@@ -43,11 +44,20 @@
         <td><%= event.date %></td>
         <td><%= event.created_at %></td>
         <td><%= event.user.name %></td>
+        <td><%= event.flaggings.length %></td>
         <td>
         <% if event.user == current_user %>
           <%= link_to 'Bewerken', edit_event_path(event) %>
           <%= link_to 'Verwijderen', event, method: :delete, data: { confirm: 'Are you sure?' } %>
         <% end %>
+
+
+
+
+        <% if user_signed_in? %>
+          <%= toggle_like_button(event, @current_user) %>
+        <% end %>
+
         </td>
       </tr>
     <% end %>

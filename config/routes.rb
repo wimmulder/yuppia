@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
-  resources :events
+  resources :events do
+    member do
+      get 'like'
+    end
+  end
   get 'events/index'
 
   root :to => 'events#index'

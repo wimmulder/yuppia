@@ -11,22 +11,48 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151202192601) do
+ActiveRecord::Schema.define(version: 20151206151910) do
+
+  create_table "event_members", force: :cascade do |t|
+    t.integer  "attendable_id"
+    t.string   "attendable_type"
+    t.integer  "invitable_id"
+    t.string   "invitable_type"
+    t.string   "invitation_token"
+    t.string   "invitation_key"
+    t.string   "rsvp_status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "events", force: :cascade do |t|
     t.string   "event_id"
     t.string   "description"
     t.datetime "date"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.float    "latitude"
     t.float    "longitude"
     t.string   "address"
     t.integer  "user_id"
+    t.integer  "flaggings_count"
   end
 
   add_index "events", ["event_id"], name: "index_events_on_event_id"
   add_index "events", ["user_id"], name: "index_events_on_user_id"
+
+  create_table "flaggings", force: :cascade do |t|
+    t.string   "flaggable_type"
+    t.integer  "flaggable_id"
+    t.string   "flagger_type"
+    t.integer  "flagger_id"
+    t.text     "reason"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "flaggings", ["flaggable_type", "flaggable_id"], name: "index_flaggings_on_flaggable_type_and_flaggable_id"
+  add_index "flaggings", ["flagger_type", "flagger_id", "flaggable_type", "flaggable_id"], name: "access_flaggings"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -45,6 +71,7 @@ ActiveRecord::Schema.define(version: 20151202192601) do
     t.string   "uid"
     t.string   "name"
     t.string   "image"
+    t.integer  "flaggings_count"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
