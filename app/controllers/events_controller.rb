@@ -10,11 +10,11 @@ class EventsController < ApplicationController
 
     if current_user.flagged?(@event, :like)
       current_user.unflag(@event, :like)
-      msg = "You now don't like this article anymore"
+      msg = "Je gaat niet meer naar dit evenement"
 
     else
       current_user.flag(@event, :like)
-      msg = "You now like this article"
+      msg = "Je gaat naar dit evenement"
     end
     redirect_to events_path, :notice => msg
   end
