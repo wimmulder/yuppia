@@ -4,7 +4,7 @@ ruby '2.1.4'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
 
-gem 'make_flaggable', :git => 'git@github.com:dgilperez/make_flaggable.git'
+gem 'make_flaggable', :github => 'dgilperez/make_flaggable.git'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
