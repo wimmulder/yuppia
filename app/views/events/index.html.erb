@@ -44,7 +44,7 @@
         <td><%= event.date %></td>
         <td><%= event.created_at %></td>
         <td><%= event.user.name %></td>
-        <td><%= event.flaggings.length %><%= User.flaggers(Event).name %></td>
+        <td><%= event.flaggings.length %></td>
         <td>
         <% if event.user == current_user %>
           <%= link_to 'Bewerken', edit_event_path(event) %>
