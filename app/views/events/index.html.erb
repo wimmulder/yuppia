@@ -43,7 +43,7 @@
         <td><%= event.address %></td>
         <td><%= event.date %></td>
         <td><%= event.created_at %></td>
-        <td><%= link_to current_user.id, current_user %></td>
+        <td><%= link_to event.user.id, event.user %></td>
         <td><%= event.flaggings.length %></td>
         <td>
         <% if event.user == current_user %>
