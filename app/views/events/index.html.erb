@@ -19,33 +19,16 @@
   <%= link_to 'Nieuw evenement aanmaken', new_event_path, :class => "btn btn-primary" %>
 <% end %>
 
-<br /><br />
 
-<table>
-  <thead>
-    <tr>
-      <th>Titel</th>
-      <th>Omschrijving</th>
-      <th>Adres</th>
-      <th>Datum</th>
-      <th>Aangemaakt op</th>
-      <th>Gebruiker</th>
-      <th>Aantal deelnemers</th>
-      <th colspan="2"></th>
-    </tr>
-  </thead>
-
-  <tbody>
     <% @events.each do |event| %>
-      <tr>
-        <td><%= link_to event.event_id, event %></td>
-        <td><%= event.description %></td>
-        <td><%= event.address %></td>
-        <td><%= event.date %></td>
-        <td><%= event.created_at %></td>
-        <td><%= link_to event.user.id, event.user %></td>
-        <td><%= event.flaggings.length %></td>
-        <td>
+        <h3><%= link_to event.event_id, event %></h3>
+        <span class="eventDescription"><%= event.description %></span>
+        <span class="eventAddress">Adres: <%= event.address %></a>
+        <span class="eventDate">Datum: <%= event.date %></span>
+        <span class="eventCreatedAt">Aangemaakt op: <%= event.created_at %></span>
+        <span class="eventCreator">Aangemaakt door: <%= link_to event.user.id, event.user %></span>
+        <span class="eventAttendees">Aantal deelnemers: <%= event.flaggings.length %></span>
+        <span class="eventEdit">
         <% if event.user == current_user %>
           <%= link_to 'Bewerken', edit_event_path(event) %>
           <%= link_to 'Verwijderen', event, method: :delete, data: { confirm: 'Are you sure?' } %>
@@ -58,11 +41,8 @@
           <%= toggle_like_button(event, @current_user) %>
         <% end %>
 
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      </span>
+      <% end %>
 
 <br />
 

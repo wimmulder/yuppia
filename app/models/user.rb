@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
 
          has_many :events
          make_flagger :flag_once => true
+         has_many :flaggings, :class_name => "MakeFlaggable::Flagging", :as => :flagger
+         has_many :flagged_items, :through => :flaggings, :source => :flaggable, :source_type => 'Event'
 
          def self.from_omniauth(auth)
            where(provider: auth.provider, uid: auth.uid).first_or_create do |user|

@@ -1,2 +1,9 @@
 <h1>Profielpagina voor gebruiker</h1>
 <%= @user.email %>
+
+<h2>Hier gaat deze gebruiker heen</h2>
+<ul>
+<% @user.flagged_items.each do |event| %>
+  <li><%= link_to event.event_id %> op <%= event.date %></li>
+<% end %>
+</ul>
