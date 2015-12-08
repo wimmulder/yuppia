@@ -1,6 +1,10 @@
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 
-
+<%- unless @lat_lng %>
+<script>
+  getGeoLocation();
+</script>
+<%- end %>
 
 <% if user_signed_in? %>
       <%= current_user.name %><%= image_tag(current_user.image) %>
@@ -14,13 +18,17 @@
        </p>
   <% end %>
 
-<h2>Evenementen</h2>
-
 <% if user_signed_in? %>
   <%= link_to 'Nieuw evenement aanmaken', new_event_path, :class => "btn btn-primary" %>
 <% end %>
 
 
+<h2>Bij jou in de buurt (<%= @userLocation %>)</h2>
+    <% @nearbylocations.each do |event| %>
+      <%= link_to event.event_id, event %>
+    <% end %>
+
+    <h2>Alle evenementen</h2>
     <% @events.each do |event| %>
         <h3><%= link_to event.event_id, event %></h3>
         <span class="eventDescription"><%= event.description %></span>

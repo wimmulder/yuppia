@@ -23,8 +23,11 @@ class EventsController < ApplicationController
 
   # GET /events
   # GET /events.json
+
   def index
+    @userLocation = cookies[:lat_lng]
     @events = Event.all
+    @nearbylocations = Event.near(@userLocation, 5)
   end
 
   # GET /events/1
