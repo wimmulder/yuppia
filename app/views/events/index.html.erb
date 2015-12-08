@@ -5,6 +5,7 @@
 <% if user_signed_in? %>
       <%= current_user.name %><%= image_tag(current_user.image) %>
       <%= link_to "Log out", destroy_user_session_path, method: :delete %>
+      <%= link_to "Change your password", edit_user_registration_path %>
      <% else %>
        <p>
          <%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook) %>
@@ -26,7 +27,7 @@
         <span class="eventAddress">Adres: <%= event.address %></a>
         <span class="eventDate">Datum: <%= event.date %></span>
         <span class="eventCreatedAt">Aangemaakt op: <%= event.created_at %></span>
-        <span class="eventCreator">Aangemaakt door: <%= link_to event.user.id, event.user %></span>
+        <span class="eventCreator">Aangemaakt door: <%= link_to event.user.name, event.user %></span>
         <span class="eventAttendees">Aantal deelnemers: <%= event.flaggings.length %></span>
         <span class="eventEdit">
         <% if event.user == current_user %>
