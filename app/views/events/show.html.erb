@@ -1,6 +1,12 @@
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 
-<p id="notice"><%= notice %></p>
+<%= render "shared/menu" %>
+
+<p class="alert" role="alert"><%= notice %></p>
+
+<div class="row">
+  <div class="container">
+  <div class="col-lg-12">
 
 <h1>Kaartje</h2>
 
@@ -72,12 +78,13 @@
   <%= @event.longitude %>
 </p>
 
-  <h2>Afstand naar Times Square</h2>
-  <%= @event.distance_to("Times Square, New York") %>
-
 
 <br><br>
 <% if @event.user == current_user %>
   <%= link_to 'Bewerken', edit_event_path(@event) %>
 <% end %>
 <%= link_to 'Terug naar overzicht', events_path %>
+
+</div>
+</div>
+</div>

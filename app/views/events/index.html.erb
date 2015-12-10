@@ -6,22 +6,16 @@
 </script>
 <%- end %>
 
-<% if user_signed_in? %>
-      <%= current_user.name %><%= image_tag(current_user.image) %>
-      <%= link_to "Log out", destroy_user_session_path, method: :delete %>
-      <%= link_to "Change your password", edit_user_registration_path %>
-     <% else %>
-       <p>
-         <%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook) %>
-         <%= link_to "Log in", new_user_session_path, class: "btn btn-default btn-lg" %>
-         <%= link_to "Sign up", new_user_registration_path, class: "btn btn-primary btn-lg" %>
-       </p>
-  <% end %>
+<%= render "shared/menu" %>
 
-<% if user_signed_in? %>
-  <%= link_to 'Nieuw evenement aanmaken', new_event_path, :class => "btn btn-primary" %>
-<% end %>
+<div class="row">
+  <div class="container">
 
+  <div class="col-lg-12">
+
+    <% if user_signed_in? %>
+      <%= link_to 'Nieuw evenement aanmaken', new_event_path, :class => "btn btn-primary" %>
+    <% end %>
 
 <h2>Bij jou in de buurt (<%= @userLocation %>)</h2>
     <% @nearbylocations.each do |event| %>
@@ -29,28 +23,32 @@
     <% end %>
 
     <h2>Alle evenementen</h2>
+
     <% @events.each do |event| %>
-        <h3><%= link_to event.event_id, event %></h3>
-        <span class="eventDescription"><%= event.description %></span>
-        <span class="eventAddress">Adres: <%= event.address %></a>
-        <span class="eventDate">Datum: <%= event.date %></span>
-        <span class="eventCreatedAt">Aangemaakt op: <%= event.created_at %></span>
-        <span class="eventCreator">Aangemaakt door: <%= link_to event.user.name, event.user %></span>
-        <span class="eventAttendees">Aantal deelnemers: <%= event.flaggings.length %></span>
-        <span class="eventEdit">
-        <% if event.user == current_user %>
-          <%= link_to 'Bewerken', edit_event_path(event) %>
-          <%= link_to 'Verwijderen', event, method: :delete, data: { confirm: 'Are you sure?' } %>
-        <% end %>
+        <div class="panel">
+          <div class="panel-heading"><h3 class="panel-title"><%= link_to event.event_id, event %></h3></div>
+            <div class="panel-body">
+            <span class="eventDescription"><%= event.description %></span>
+            <span class="eventAddress">Adres: <%= event.address %></a>
+            <span class="eventDate">Datum: <%= event.date %></span>
+            <span class="eventCreatedAt">Aangemaakt op: <%= event.created_at %></span>
+            <span class="eventCreator">Aangemaakt door: <%= link_to event.user.name, event.user %></span>
+            <span class="eventAttendees">Aantal deelnemers: <span class="badge"><%= event.flaggings.length %></span></span>
+            <span class="eventEdit">
+            </div>
+            <div class="panel-footer">
+            <% if event.user == current_user %>
+              <%= link_to 'Bewerken', edit_event_path(event) %>
+              <%= link_to 'Verwijderen', event, method: :delete, data: { confirm: 'Are you sure?' } %>
+            <% end %>
 
+            <% if user_signed_in? %>
+              <%= toggle_like_button(event, @current_user) %>
+            <% end %>
+          </span>
+          </div>
 
-
-
-        <% if user_signed_in? %>
-          <%= toggle_like_button(event, @current_user) %>
-        <% end %>
-
-      </span>
+        </div>
       <% end %>
 
 <br />
@@ -92,3 +90,5 @@
   // Fit to bounds
   map.fitBounds(bounds);
 </script>
+</div>
+</div>
