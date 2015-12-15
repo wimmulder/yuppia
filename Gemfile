@@ -6,6 +6,8 @@ gem 'rails', '4.2.4'
 
 gem 'make_flaggable', :git => 'git://github.com/dgilperez/make_flaggable.git'
 
+gem 'public_activity'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 gem 'bootstrap-sass'

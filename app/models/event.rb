@@ -5,4 +5,8 @@ class Event < ActiveRecord::Base
   make_flaggable
 
   has_many :flaggings, :class_name => "MakeFlaggable::Flagging", :as => :flaggable
+
+  include PublicActivity::Model
+  tracked
+
 end

@@ -2,17 +2,19 @@ class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
   before_action :correct_user, only: [:edit, :update, :destroy]
+  before_action :load_activities, only: [:index, :show, :new, :edit]
+
 
 
   def like
     @event = Event.find(params[:id])
-
 
     if current_user.flagged?(@event, :like)
       current_user.unflag(@event, :like)
       msg = "Je gaat niet meer naar dit evenement"
 
     else
+      @event.create_activity :like
       current_user.flag(@event, :like)
       msg = "Je gaat naar dit evenement"
     end
@@ -91,6 +93,10 @@ class EventsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_event
       @event = Event.find_by(id: params[:id])
+    end
+
+    def load_activities
+      @activities = PublicActivity::Activity.order('created_at DESC')
     end
 
     def correct_user
